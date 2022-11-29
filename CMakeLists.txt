@@ -5,9 +5,9 @@ set(CMAKE_CXX_STANDARD 14)              # Compile as C++14
 set(CMAKE_CXX_STANDARD_REQUIRED ON)     # Require C++14 support
 
 project(ZJURaft
-        VERSION 2019.1
-        DESCRIPTION "The ZJURaft Relational Database Management System (Educational) @ https://github.com/cmu-db/ZJURaft"
-        LANGUAGES C CXX
+        VERSION 2022.11
+        DESCRIPTION "Raft implementation by ZJU students. @https://github.com/ZJUDB/ZJURaft.git"
+        LANGUAGES CXX
         )
 
 # People keep running CMake in the wrong folder, completely nuking their project or creating weird bugs.
@@ -175,4 +175,4 @@ add_custom_target(check-clang-tidy
         -clang-tidy-binary ${CLANG_TIDY_BIN}                              # using our clang-tidy binary
         -p ${CMAKE_BINARY_DIR}                                            # using cmake's generated compile commands
         )
-add_dependencies(check-clang-tidy gtest ZJURaft_shared)                    # needs gtest headers, compile_commands.json
+add_dependencies(check-clang-tidy gtest zju_raft_shared)                    # needs gtest headers, compile_commands.json
