@@ -55,17 +55,17 @@ First, make sure that you have docker installed:
 From the repository directory, run these commands to create a Docker image and container:
 
 ```
-$ docker build . -t ZJURaft
-$ docker create -t -i --name ZJURaft -v $(pwd):/ZJURaft ZJURaft bash
+docker build . -t zju_raft
+docker create -t -i --name zju_raft -v $(pwd):/zju_raft zju_raft bash
 ```
 
 This will create a Docker image and container. To run it, type:
 
 ```
-$ docker start -a -i ZJURaft
+docker start -a -i zju_raft
 ```
 
-to open a shell within the box. You can find ZJURaft's code mounted at `/ZJURaft` and run the commands mentioned above like normal.
+to open a shell within the box. You can find zju_raft's code mounted at `/zju_raft` and run the commands mentioned above like normal.
 
 
 
@@ -73,11 +73,11 @@ to open a shell within the box. You can find ZJURaft's code mounted at `/ZJURaft
 
 build and run all test
 ```
-$ cd build
-$ make check-tests
+cd build
+make check-tests
 ```
 buidl and run single test
 ```
-$ make smaple_test
-$ ./test/smaple_test
+make smaple_test
+./test/smaple_test
 ```
