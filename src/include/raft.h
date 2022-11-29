@@ -1,18 +1,17 @@
 /*
  * @Date: 2022-11-29 18:10:55
  * @LastEditors: Yunxiao Du yunxiao.du@zju.edu.cn
- * @LastEditTime: 2022-11-29 20:07:25
+ * @LastEditTime: 2022-11-29 20:42:20
  * @FilePath: /ZJURaft/src/include/raft.h
  * Copyright (c) 2022 by Yunxiao Du yunxiao.du@zju.edu.cn, All Rights Reserved.
  */
 
-#ifndef ZJU_RAFT_H
-#define ZJU_RAFT_H
+#pragma once
 
 #include <vector>
 
+#include "include/status.h"
 #include "include/storage.h"
-
 namespace ZJURaft {
 
 enum RaftRole { LEADER, CANDIDATE, FOLLOWER };
@@ -33,16 +32,21 @@ class RaftConfig {
 
 class ZJURaft {
  public:
-  ZJURaft(/* args */);
+  ZJURaft();
   ~ZJURaft();
 
- private:
-  RaftConfig config_;
+  Status StartElection(){};
+  Status SendRequestVote(){};
+  Status SendHeartBeat(){};
+  Status SendLogEntries(){};
+  Status ChangeRole() {}
+
+  Status
+
+      private : RaftConfig config_;
   RaftRole role_;
   Storage storage_;
   std::vector<size_t> raft_servers_;
 };
 
 }  // namespace ZJURaft
-
-#endif  // ZJU_RAFT_H
