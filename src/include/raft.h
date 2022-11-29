@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-11-29 18:10:55
  * @LastEditors: Yunxiao Du yunxiao.du@zju.edu.cn
- * @LastEditTime: 2022-11-29 20:42:20
+ * @LastEditTime: 2022-11-29 20:57:35
  * @FilePath: /ZJURaft/src/include/raft.h
  * Copyright (c) 2022 by Yunxiao Du yunxiao.du@zju.edu.cn, All Rights Reserved.
  */
@@ -35,15 +35,14 @@ class ZJURaft {
   ZJURaft();
   ~ZJURaft();
 
-  Status StartElection(){};
-  Status SendRequestVote(){};
-  Status SendHeartBeat(){};
-  Status SendLogEntries(){};
-  Status ChangeRole() {}
+  Status StartElection();
+  Status SendRequestVote();
+  Status SendHeartBeat();
+  Status SendLogEntries();
+  Status ChangeRole();
 
-  Status
-
-      private : RaftConfig config_;
+ private:
+  RaftConfig config_;
   RaftRole role_;
   Storage storage_;
   std::vector<size_t> raft_servers_;
