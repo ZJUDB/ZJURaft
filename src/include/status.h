@@ -1,20 +1,21 @@
 /*
  * @Date: 2022-11-29 20:22:36
  * @LastEditors: Yunxiao Du yunxiao.du@zju.edu.cn
- * @LastEditTime: 2022-11-29 20:32:13
+ * @LastEditTime: 2022-11-30 00:36:04
  * @FilePath: /ZJURaft/src/include/status.h
  * Copyright (c) 2022 by Yunxiao Du yunxiao.du@zju.edu.cn, All Rights Reserved.
  */
 #pragma once
 
 #include <string>
+#include <utility>
 
-namespace ZJURaft {
+namespace zju_raft {
 
 class Status {
  public:
   // Create a success status.
-  Status() noexcept : state_(nullptr) {}
+  Status() noexcept = default;
   ~Status() { delete[] state_; }
 
   Status(const Status &rhs);
@@ -59,28 +60,28 @@ class Status {
   }
 
   // Returns true iff the status indicates success.
-  bool ok() const { return (state_ == nullptr); }
+  bool IsOK() const { return (state_ == nullptr); }
 
   // Returns true iff the status indicates a NotFound error.
-  bool IsNotFound() const { return code() == kNotFound; }
+  bool IsNotFound() const { return GetCode() == kNotFound; }
 
   // Returns true iff the status indicates a Corruption error.
-  bool IsCorruption() const { return code() == kCorruption; }
+  bool IsCorruption() const { return GetCode() == kCorruption; }
 
   // Returns true iff the status indicates an IOError.
-  bool IsIOError() const { return code() == kIOError; }
+  bool IsIOError() const { return GetCode() == kIOError; }
 
   // Returns true iff the status indicates a NotSupportedError.
-  bool IsNotSupportedError() const { return code() == kNotSupported; }
+  bool IsNotSupportedError() const { return GetCode() == kNotSupported; }
 
   // Returns true iff the status indicates an InvalidArgument.
-  bool IsInvalidArgument() const { return code() == kInvalidArgument; }
+  bool IsInvalidArgument() const { return GetCode() == kInvalidArgument; }
 
   // Returns true iff the status indicates an SplitUnderflow.
-  bool IsSplitUnderflow() const { return code() == kSplitUnderflow; }
+  bool IsSplitUnderflow() const { return GetCode() == kSplitUnderflow; }
 
   // Returns true iff the status indicates an LeafEmpty.
-  bool IsLeafEmpty() const { return code() == kLeafEmpty; }
+  bool IsLeafEmpty() const { return GetCode() == kLeafEmpty; }
 
   // Return a string representation of this status suitable for printing.
   // Returns the string "OK" for success.
@@ -92,7 +93,7 @@ class Status {
   //    state_[0..3] == length of message
   //    state_[4]    == code
   //    state_[5..]  == message
-  const char *state_;
+  const char *state_ = nullptr;
 
   enum Code {
     kOk = 0,
@@ -105,7 +106,7 @@ class Status {
     kLeafEmpty = 7
   };
 
-  Code code() const {
+  Code GetCode() const {
     return (state_ == nullptr) ? kOk : static_cast<Code>(state_[4]);
   }
 
@@ -130,4 +131,4 @@ inline Status &Status::operator=(Status &&rhs) noexcept {
   return *this;
 }
 
-}  // namespace ZJURaft
+}  // namespace zju_raft

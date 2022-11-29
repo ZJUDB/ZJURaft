@@ -1,22 +1,23 @@
 /*
  * @Date: 2022-11-29 18:10:55
  * @LastEditors: Yunxiao Du yunxiao.du@zju.edu.cn
- * @LastEditTime: 2022-11-29 20:57:35
+ * @LastEditTime: 2022-11-29 23:24:42
  * @FilePath: /ZJURaft/src/include/raft.h
  * Copyright (c) 2022 by Yunxiao Du yunxiao.du@zju.edu.cn, All Rights Reserved.
  */
 
 #pragma once
 
+#include <string>
 #include <vector>
 
 #include "include/status.h"
 #include "include/storage.h"
-namespace ZJURaft {
+namespace zju_raft {
 
 enum RaftRole { LEADER, CANDIDATE, FOLLOWER };
 
-class RaftConfig {
+struct RaftConfig {
   // ip address used for rpc communication.
   std::string ip_address;
   // port used by for rpc communication.
@@ -32,14 +33,15 @@ class RaftConfig {
 
 class ZJURaft {
  public:
-  ZJURaft();
-  ~ZJURaft();
+  ZJURaft() = default;
+  ~ZJURaft() = default;
 
   Status StartElection();
   Status SendRequestVote();
   Status SendHeartBeat();
   Status SendLogEntries();
-  Status ChangeRole();
+  Status ChangeRoleTo(RaftRole role);
+  Status ApplyLog();
 
  private:
   RaftConfig config_;
@@ -48,4 +50,4 @@ class ZJURaft {
   std::vector<size_t> raft_servers_;
 };
 
-}  // namespace ZJURaft
+}  // namespace zju_raft

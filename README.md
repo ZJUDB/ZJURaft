@@ -1,3 +1,10 @@
+<!--
+ * @Date: 2022-11-29 22:47:04
+ * @LastEditors: Yunxiao Du yunxiao.du@zju.edu.cn
+ * @LastEditTime: 2022-11-29 23:32:11
+ * @FilePath: /ZJURaft/README.md
+ * Copyright (c) 2022 by Yunxiao Du yunxiao.du@zju.edu.cn, All Rights Reserved. 
+-->
 ## Build
 
 ### Linux Only
@@ -11,18 +18,18 @@ $ sudo build_support/packages.sh
 Then run the following commands to build the system:
 
 ```
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
+mkdir build
+cd build
+cmake ..
+make
 ```
 
 If you want to compile the system in debug mode, pass in the following flag to cmake:
 Debug mode:
 
 ```
-$ cmake -DCMAKE_BUILD_TYPE=Debug ..
-$ make
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+make
 ```
 This enables [AddressSanitizer](https://github.com/google/sanitizers), which can generate false positives for overflow on STL containers. If you encounter this, define the environment variable `ASAN_OPTIONS=detect_container_overflow=0`.
 
