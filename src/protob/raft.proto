@@ -1,7 +1,5 @@
 syntax = "proto3";
- 
-//package helloworld;
- 
+  
 // The greeting service definition.
 service RAFT {
     // Sends a greeting
@@ -25,7 +23,6 @@ message RequestVoteReply {
 }
 
 message AppendEntries{}
-
 
 message AppendEntriesArgs {
     int32 Term = 1;      //  "leader’s term"
